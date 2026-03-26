@@ -6,182 +6,336 @@ type Tab = 'top' | 'menu' | 'info' | 'contact'
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('top')
 
+  const tabs: { id: Tab; label: string; en: string }[] = [
+    { id: 'top', label: 'トップ', en: 'Top' },
+    { id: 'menu', label: 'メニュー', en: 'Menu' },
+    { id: 'info', label: '店舗情報', en: 'Info' },
+    { id: 'contact', label: 'お問い合わせ', en: 'Contact' },
+  ]
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)' }}>
-      {/* Header */}
+
+      {/* Header — minimal, editorial */}
       <header style={{
-        background: 'var(--primary)',
-        padding: '0',
+        background: 'var(--white)',
+        borderBottom: '1px solid var(--border)',
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        boxShadow: '0 2px 12px rgba(0,0,0,0.4)'
       }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', padding: '20px 24px 0' }}>
-          <div style={{ textAlign: 'center', paddingBottom: '16px', borderBottom: '1px solid rgba(200,169,110,0.2)' }}>
-            <p style={{ color: 'var(--accent-light)', fontSize: '11px', letterSpacing: '3px', marginBottom: '6px', textTransform: 'uppercase' }}>
-              Specialty Coffee
-            </p>
-            <h1 style={{ color: 'var(--accent)', fontSize: '22px', letterSpacing: '2px', fontWeight: '700' }}>
-              ELEPHANT FACTORY COFFEE
-            </h1>
-            <p style={{ color: 'var(--accent-light)', fontSize: '12px', marginTop: '4px', letterSpacing: '1px' }}>
-              京都・河原町の隠れ家コーヒーショップ
-            </p>
-          </div>
+        <div style={{ maxWidth: '1040px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            height: '64px',
+          }}>
+            {/* Logo */}
+            <div>
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '18px',
+                letterSpacing: '3px',
+                color: 'var(--primary)',
+                fontWeight: '600',
+                lineHeight: 1,
+              }}>
+                ELEPHANT FACTORY COFFEE
+              </p>
+              <p style={{
+                fontSize: '10px',
+                letterSpacing: '2px',
+                color: 'var(--text-light)',
+                marginTop: '3px',
+              }}>
+                KYOTO · SPECIALTY COFFEE
+              </p>
+            </div>
 
-          {/* Tabs */}
-          <nav style={{ display: 'flex', justifyContent: 'center', gap: '0' }}>
-            {([
-              { id: 'top', label: 'トップ' },
-              { id: 'menu', label: 'メニュー' },
-              { id: 'info', label: '店舗情報' },
-              { id: 'contact', label: 'お問い合わせ' },
-            ] as { id: Tab; label: string }[]).map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  borderBottom: activeTab === tab.id ? '2px solid var(--accent)' : '2px solid transparent',
-                  color: activeTab === tab.id ? 'var(--accent)' : 'var(--accent-light)',
-                  padding: '14px 20px',
-                  fontSize: '13px',
-                  letterSpacing: '1px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  fontFamily: 'Noto Sans JP, sans-serif',
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+            {/* Nav */}
+            <nav style={{ display: 'flex', gap: '0' }}>
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: activeTab === tab.id ? '2px solid var(--accent)' : '2px solid transparent',
+                    color: activeTab === tab.id ? 'var(--accent)' : 'var(--text-light)',
+                    padding: '22px 20px 20px',
+                    fontSize: '12px',
+                    letterSpacing: '1.5px',
+                    cursor: 'pointer',
+                    fontFamily: "'Noto Sans JP', sans-serif",
+                    fontWeight: '400',
+                    transition: 'color 0.2s',
+                  }}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main style={{ maxWidth: '960px', margin: '0 auto', padding: '0 24px 60px' }}>
+      <main style={{ maxWidth: '1040px', margin: '0 auto', padding: '0 32px 80px' }}>
 
-        {/* TOP TAB */}
+        {/* ── TOP ── */}
         {activeTab === 'top' && (
           <div>
-            {/* Hero */}
+
+            {/* Hero — editorial grid layout */}
             <div style={{
-              background: 'var(--primary-mid)',
-              margin: '40px 0 48px',
-              borderRadius: '4px',
-              padding: '64px 40px',
-              textAlign: 'center',
-              position: 'relative',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '0',
+              margin: '60px 0 80px',
+              background: 'var(--primary)',
+              borderRadius: '2px',
               overflow: 'hidden',
-              border: '1px solid rgba(200,169,110,0.2)',
+              minHeight: '420px',
             }}>
+              {/* Left — text */}
               <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                background: 'radial-gradient(ellipse at center, rgba(200,169,110,0.08) 0%, transparent 70%)',
-              }} />
-              <p style={{ color: 'var(--accent)', fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '16px' }}>
-                Est. in Kyoto
-              </p>
-              <h2 style={{ color: 'var(--accent-light)', fontSize: '28px', lineHeight: '1.6', marginBottom: '20px' }}>
-                河原町の裏路地に佇む<br />
-                <span style={{ color: 'var(--accent)', fontStyle: 'italic' }}>物語のあるコーヒー</span>
-              </h2>
-              <p style={{ color: '#A89070', fontSize: '14px', lineHeight: '2', maxWidth: '480px', margin: '0 auto 32px' }}>
-                村上春樹の作品にちなんだ店名が示すように、
-                ここは日常を少し離れるための場所。
-                丁寧に淹れたスペシャルティコーヒーとともに、
-                アンティーク家具に囲まれた静かなひとときを。
-              </p>
-              <button
-                onClick={() => setActiveTab('menu')}
-                style={{
-                  background: 'transparent',
-                  border: '1px solid var(--accent)',
-                  color: 'var(--accent)',
-                  padding: '12px 32px',
-                  fontSize: '13px',
-                  letterSpacing: '2px',
-                  cursor: 'pointer',
-                  borderRadius: '2px',
-                  transition: 'all 0.2s',
+                padding: '60px 56px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '11px',
+                  letterSpacing: '4px',
+                  color: 'var(--accent-light)',
+                  marginBottom: '24px',
                   textTransform: 'uppercase',
-                }}
-              >
-                Menu を見る
-              </button>
+                }}>
+                  Est. in Kyoto · Specialty Coffee
+                </p>
+                <h2 style={{
+                  fontFamily: "'Zen Old Mincho', serif",
+                  fontSize: '36px',
+                  lineHeight: '1.5',
+                  color: '#F4EFE6',
+                  marginBottom: '20px',
+                  fontWeight: '700',
+                }}>
+                  物語のある<br />
+                  一杯を。
+                </h2>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '13px',
+                  color: 'var(--accent-light)',
+                  fontStyle: 'italic',
+                  marginBottom: '24px',
+                  letterSpacing: '1px',
+                }}>
+                  "A cup of coffee, a novel, and time to yourself."
+                </p>
+                <p style={{
+                  color: 'rgba(244,239,230,0.6)',
+                  fontSize: '13px',
+                  lineHeight: '2',
+                  maxWidth: '320px',
+                }}>
+                  河原町の裏路地。アンティーク家具と古書に囲まれた
+                  静かな空間で、スペシャルティコーヒーをどうぞ。
+                </p>
+              </div>
+
+              {/* Right — decorative panel */}
+              <div style={{
+                background: 'var(--bg-section)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '60px 40px',
+                position: 'relative',
+                overflow: 'hidden',
+              }}>
+                <div style={{
+                  position: 'absolute',
+                  top: '40px', right: '40px',
+                  width: '120px', height: '120px',
+                  borderRadius: '50%',
+                  border: '1px solid var(--border)',
+                  opacity: 0.5,
+                }} />
+                <div style={{
+                  position: 'absolute',
+                  bottom: '30px', left: '30px',
+                  width: '80px', height: '80px',
+                  borderRadius: '50%',
+                  border: '1px solid var(--border)',
+                  opacity: 0.3,
+                }} />
+                <p style={{
+                  fontFamily: "'Zen Old Mincho', serif",
+                  fontSize: '80px',
+                  color: 'var(--border)',
+                  lineHeight: 1,
+                  marginBottom: '16px',
+                  fontWeight: '900',
+                }}>☕</p>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '28px',
+                  color: 'var(--primary-mid)',
+                  letterSpacing: '4px',
+                  fontWeight: '600',
+                }}>
+                  ELEPHANT
+                </p>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '14px',
+                  color: 'var(--text-light)',
+                  letterSpacing: '3px',
+                  marginTop: '4px',
+                }}>
+                  FACTORY COFFEE
+                </p>
+              </div>
             </div>
 
-            {/* Features */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '48px' }}>
+            {/* 3 pillars */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '1px',
+              background: 'var(--border)',
+              border: '1px solid var(--border)',
+              borderRadius: '2px',
+              overflow: 'hidden',
+              marginBottom: '80px',
+            }}>
               {[
                 {
-                  icon: '☕',
-                  title: 'スペシャルティコーヒー',
-                  desc: '厳選された豆を丁寧に焙煎。産地の個性を活かした一杯をお楽しみください。'
+                  no: '01',
+                  title: 'Specialty\nCoffee',
+                  jp: 'スペシャルティコーヒー',
+                  desc: '産地・農園にこだわった豆を丁寧に焙煎。土地の個性が宿る一杯。',
                 },
                 {
-                  icon: '🏛️',
-                  title: 'アンティークな空間',
-                  desc: '古書や年代物の家具が醸し出す独特の雰囲気。時間を忘れてお過ごしいただけます。'
+                  no: '02',
+                  title: 'Literary\nAtmosphere',
+                  jp: '文学的な空間',
+                  desc: '村上春樹の作品に着想を得た店名の通り、本と物語に囲まれた隠れ家。',
                 },
                 {
-                  icon: '📚',
-                  title: '文学とコーヒー',
-                  desc: '村上春樹の作品からインスパイアされた、物語を感じる飲み物とスイーツ。'
+                  no: '03',
+                  title: 'Antique\nInterior',
+                  jp: 'アンティーク内装',
+                  desc: '年代物の家具と古書。京都の路地裏に佇む、時間を忘れる空間。',
                 },
-              ].map((f) => (
-                <div key={f.title} style={{
-                  background: 'var(--primary-mid)',
-                  border: '1px solid rgba(200,169,110,0.15)',
-                  borderRadius: '4px',
-                  padding: '32px 24px',
-                  textAlign: 'center',
+              ].map(item => (
+                <div key={item.no} style={{
+                  background: 'var(--white)',
+                  padding: '40px 32px',
                 }}>
-                  <div style={{ fontSize: '32px', marginBottom: '16px' }}>{f.icon}</div>
-                  <h3 style={{ color: 'var(--accent)', fontSize: '15px', marginBottom: '12px', fontWeight: '600' }}>{f.title}</h3>
-                  <p style={{ color: '#A89070', fontSize: '13px', lineHeight: '1.9' }}>{f.desc}</p>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '11px',
+                    letterSpacing: '2px',
+                    color: 'var(--accent)',
+                    marginBottom: '16px',
+                  }}>
+                    {item.no}
+                  </p>
+                  <h3 style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '22px',
+                    color: 'var(--primary)',
+                    lineHeight: '1.3',
+                    whiteSpace: 'pre-line',
+                    marginBottom: '8px',
+                    fontWeight: '600',
+                  }}>
+                    {item.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '11px',
+                    color: 'var(--accent)',
+                    letterSpacing: '1px',
+                    marginBottom: '16px',
+                  }}>
+                    {item.jp}
+                  </p>
+                  <p style={{
+                    fontSize: '13px',
+                    color: 'var(--text-mid)',
+                    lineHeight: '1.9',
+                  }}>
+                    {item.desc}
+                  </p>
                 </div>
               ))}
             </div>
 
-            {/* Hours Quick */}
+            {/* Info strip */}
             <div style={{
-              background: 'var(--primary)',
-              border: '1px solid rgba(200,169,110,0.2)',
-              borderRadius: '4px',
-              padding: '32px 40px',
+              background: 'var(--bg-section)',
+              border: '1px solid var(--border)',
+              borderRadius: '2px',
+              padding: '32px 48px',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               flexWrap: 'wrap',
               gap: '24px',
             }}>
-              <div>
-                <p style={{ color: 'var(--accent)', fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Hours</p>
-                <p style={{ color: 'var(--accent-light)', fontSize: '16px' }}>12:00 〜 22:00</p>
-                <p style={{ color: '#7A6A54', fontSize: '13px', marginTop: '4px' }}>不定休（Instagramにてお知らせ）</p>
-              </div>
-              <div>
-                <p style={{ color: 'var(--accent)', fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Location</p>
-                <p style={{ color: 'var(--accent-light)', fontSize: '14px' }}>京都市中京区蛸薬師通東入ル</p>
-                <p style={{ color: 'var(--accent-light)', fontSize: '14px' }}>備前島町309-4 HKビル2F</p>
-              </div>
-              <div>
-                <p style={{ color: 'var(--accent)', fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Phone</p>
-                <p style={{ color: 'var(--accent-light)', fontSize: '16px' }}>075-212-1808</p>
-              </div>
+              {[
+                { label: 'Hours', value: '12:00 — 22:00', sub: '不定休（Instagramにてお知らせ）' },
+                { label: 'Location', value: '京都市中京区蛸薬師通東入ル', sub: '備前島町309-4 HKビル2F' },
+                { label: 'Phone', value: '075-212-1808', sub: '' },
+              ].map(info => (
+                <div key={info.label}>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '10px',
+                    letterSpacing: '3px',
+                    color: 'var(--accent)',
+                    textTransform: 'uppercase',
+                    marginBottom: '6px',
+                  }}>
+                    {info.label}
+                  </p>
+                  <p style={{ color: 'var(--primary)', fontSize: '15px', fontWeight: '500' }}>{info.value}</p>
+                  {info.sub && <p style={{ color: 'var(--text-light)', fontSize: '12px', marginTop: '2px' }}>{info.sub}</p>}
+                </div>
+              ))}
+              <button
+                onClick={() => setActiveTab('menu')}
+                style={{
+                  background: 'var(--accent)',
+                  border: 'none',
+                  color: 'var(--white)',
+                  padding: '12px 28px',
+                  fontSize: '12px',
+                  letterSpacing: '2px',
+                  cursor: 'pointer',
+                  borderRadius: '1px',
+                  fontFamily: "'Noto Sans JP', sans-serif",
+                }}
+              >
+                メニューを見る →
+              </button>
             </div>
           </div>
         )}
 
-        {/* MENU TAB */}
+        {/* ── MENU ── */}
         {activeTab === 'menu' && (
-          <div style={{ paddingTop: '40px' }}>
-            <h2 style={{ color: 'var(--accent)', fontSize: '20px', textAlign: 'center', letterSpacing: '3px', marginBottom: '8px', textTransform: 'uppercase' }}>Menu</h2>
-            <p style={{ color: '#7A6A54', textAlign: 'center', fontSize: '13px', marginBottom: '40px' }}>メニュー</p>
+          <div style={{ paddingTop: '60px' }}>
+            <div style={{ marginBottom: '48px', borderBottom: '1px solid var(--border)', paddingBottom: '24px' }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', letterSpacing: '4px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '8px' }}>Menu</p>
+              <h2 style={{ fontSize: '28px', color: 'var(--primary)', fontWeight: '700' }}>メニュー</h2>
+            </div>
 
             {[
               {
@@ -219,61 +373,75 @@ export default function Home() {
                   { name: 'アフォガート', price: '¥680', desc: 'エスプレッソとアイスの絶妙な組み合わせ' },
                 ]
               },
-            ].map((section) => (
-              <div key={section.category} style={{ marginBottom: '40px' }}>
-                <h3 style={{
-                  color: 'var(--accent)',
-                  fontSize: '14px',
-                  letterSpacing: '3px',
-                  textTransform: 'uppercase',
-                  borderBottom: '1px solid rgba(200,169,110,0.3)',
-                  paddingBottom: '12px',
-                  marginBottom: '20px',
-                }}>
-                  {section.category}
-                </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-                  {section.items.map((item) => (
+            ].map((section, si) => (
+              <div key={section.category} style={{ marginBottom: '48px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '10px',
+                    letterSpacing: '2px',
+                    color: 'var(--accent)',
+                    minWidth: '24px',
+                  }}>
+                    {String(si + 1).padStart(2, '0')}
+                  </p>
+                  <h3 style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '20px',
+                    color: 'var(--primary)',
+                    letterSpacing: '2px',
+                    fontWeight: '600',
+                  }}>
+                    {section.category}
+                  </h3>
+                  <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', background: 'var(--border)' }}>
+                  {section.items.map(item => (
                     <div key={item.name} style={{
+                      background: 'var(--white)',
+                      padding: '20px 24px',
                       display: 'flex',
                       justifyContent: 'space-between',
-                      alignItems: 'flex-start',
-                      padding: '16px 20px',
-                      background: 'var(--primary-mid)',
-                      border: '1px solid rgba(200,169,110,0.1)',
-                      borderRadius: '3px',
+                      alignItems: 'center',
                     }}>
                       <div>
-                        <p style={{ color: 'var(--accent-light)', fontSize: '14px', fontWeight: '500', marginBottom: '4px' }}>{item.name}</p>
-                        <p style={{ color: '#7A6A54', fontSize: '12px' }}>{item.desc}</p>
+                        <p style={{ color: 'var(--primary)', fontSize: '14px', fontWeight: '500', marginBottom: '3px' }}>{item.name}</p>
+                        <p style={{ color: 'var(--text-light)', fontSize: '12px' }}>{item.desc}</p>
                       </div>
-                      <p style={{ color: 'var(--accent)', fontSize: '14px', fontWeight: '600', marginLeft: '16px', whiteSpace: 'nowrap' }}>{item.price}</p>
+                      <p style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        color: 'var(--accent)',
+                        fontSize: '16px',
+                        fontWeight: '600',
+                        marginLeft: '24px',
+                        whiteSpace: 'nowrap',
+                      }}>
+                        {item.price}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
 
-            <p style={{ color: '#7A6A54', fontSize: '12px', textAlign: 'center', marginTop: '8px' }}>
+            <p style={{ color: 'var(--text-light)', fontSize: '12px', textAlign: 'center', marginTop: '8px', fontStyle: 'italic' }}>
               ※ 価格は税込み表示です。季節によりメニューが変わる場合がございます。
             </p>
           </div>
         )}
 
-        {/* INFO TAB */}
+        {/* ── INFO ── */}
         {activeTab === 'info' && (
-          <div style={{ paddingTop: '40px' }}>
-            <h2 style={{ color: 'var(--accent)', fontSize: '20px', textAlign: 'center', letterSpacing: '3px', marginBottom: '8px', textTransform: 'uppercase' }}>Shop Info</h2>
-            <p style={{ color: '#7A6A54', textAlign: 'center', fontSize: '13px', marginBottom: '40px' }}>店舗情報・アクセス</p>
+          <div style={{ paddingTop: '60px' }}>
+            <div style={{ marginBottom: '48px', borderBottom: '1px solid var(--border)', paddingBottom: '24px' }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', letterSpacing: '4px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '8px' }}>Shop Info</p>
+              <h2 style={{ fontSize: '28px', color: 'var(--primary)', fontWeight: '700' }}>店舗情報・アクセス</h2>
+            </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '40px' }}>
-              <div style={{
-                background: 'var(--primary-mid)',
-                border: '1px solid rgba(200,169,110,0.15)',
-                borderRadius: '4px',
-                padding: '32px',
-              }}>
-                <h3 style={{ color: 'var(--accent)', fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '24px' }}>基本情報</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+              {/* Left: details */}
+              <div>
                 {[
                   { label: '店名', value: 'ELEPHANT FACTORY COFFEE' },
                   { label: '電話番号', value: '075-212-1808' },
@@ -281,135 +449,127 @@ export default function Home() {
                   { label: '営業時間', value: '12:00 〜 22:00' },
                   { label: '定休日', value: '不定休\n（Instagramにてお知らせ）' },
                   { label: 'Instagram', value: '@elephantfactorycoffee' },
-                ].map((row) => (
+                ].map((row, i) => (
                   <div key={row.label} style={{
                     display: 'flex',
-                    gap: '16px',
-                    paddingBottom: '16px',
-                    marginBottom: '16px',
-                    borderBottom: '1px solid rgba(200,169,110,0.1)',
+                    gap: '24px',
+                    padding: '18px 0',
+                    borderBottom: '1px solid var(--border)',
                   }}>
-                    <p style={{ color: 'var(--accent)', fontSize: '12px', minWidth: '80px', paddingTop: '2px' }}>{row.label}</p>
-                    <p style={{ color: 'var(--accent-light)', fontSize: '13px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>{row.value}</p>
+                    <p style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: '11px',
+                      letterSpacing: '1px',
+                      color: 'var(--accent)',
+                      minWidth: '80px',
+                      paddingTop: '2px',
+                      textTransform: 'uppercase',
+                    }}>
+                      {row.label}
+                    </p>
+                    <p style={{ color: 'var(--text-mid)', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>
+                      {row.value}
+                    </p>
                   </div>
                 ))}
               </div>
 
+              {/* Right: access */}
               <div>
                 <div style={{
-                  background: 'var(--primary-mid)',
-                  border: '1px solid rgba(200,169,110,0.15)',
-                  borderRadius: '4px',
+                  background: 'var(--bg-section)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '2px',
                   padding: '32px',
-                  marginBottom: '24px',
+                  marginBottom: '20px',
                 }}>
-                  <h3 style={{ color: 'var(--accent)', fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '20px' }}>アクセス</h3>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '11px', letterSpacing: '3px', color: 'var(--accent)',
+                    textTransform: 'uppercase', marginBottom: '20px',
+                  }}>Access</p>
                   {[
                     { icon: '🚇', text: '阪急京都線「河原町駅」徒歩5分' },
                     { icon: '🚃', text: '京阪「祇園四条駅」徒歩8分' },
                     { icon: '🚌', text: '市バス「四条河原町」バス停すぐ' },
-                  ].map((item) => (
-                    <div key={item.text} style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      marginBottom: '14px',
-                    }}>
-                      <span style={{ fontSize: '18px' }}>{item.icon}</span>
-                      <p style={{ color: 'var(--accent-light)', fontSize: '13px', lineHeight: '1.7' }}>{item.text}</p>
+                  ].map(item => (
+                    <div key={item.text} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '12px' }}>
+                      <span style={{ fontSize: '16px' }}>{item.icon}</span>
+                      <p style={{ color: 'var(--text-mid)', fontSize: '13px', lineHeight: '1.7' }}>{item.text}</p>
                     </div>
                   ))}
                 </div>
 
-                <div style={{
-                  background: 'var(--primary)',
-                  border: '1px solid rgba(200,169,110,0.2)',
-                  borderRadius: '4px',
-                  padding: '24px 32px',
-                }}>
-                  <h3 style={{ color: 'var(--accent)', fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '16px' }}>Google マップで見る</h3>
-                  <a
-                    href="https://maps.google.com/?q=ELEPHANT+FACTORY+COFFEE+京都"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-block',
-                      border: '1px solid var(--accent)',
-                      color: 'var(--accent)',
-                      padding: '10px 24px',
-                      fontSize: '12px',
-                      letterSpacing: '2px',
-                      textDecoration: 'none',
-                      borderRadius: '2px',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    地図を開く
-                  </a>
-                </div>
+                <a
+                  href="https://maps.google.com/?q=ELEPHANT+FACTORY+COFFEE+京都"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'block',
+                    background: 'var(--primary)',
+                    color: 'var(--bg)',
+                    padding: '14px 24px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    fontSize: '12px',
+                    letterSpacing: '2px',
+                    borderRadius: '1px',
+                  }}
+                >
+                  Google マップで開く
+                </a>
               </div>
             </div>
           </div>
         )}
 
-        {/* CONTACT TAB */}
+        {/* ── CONTACT ── */}
         {activeTab === 'contact' && (
-          <div style={{ paddingTop: '40px', maxWidth: '560px', margin: '0 auto' }}>
-            <h2 style={{ color: 'var(--accent)', fontSize: '20px', textAlign: 'center', letterSpacing: '3px', marginBottom: '8px', textTransform: 'uppercase' }}>Contact</h2>
-            <p style={{ color: '#7A6A54', textAlign: 'center', fontSize: '13px', marginBottom: '40px' }}>お問い合わせ</p>
-
-            <div style={{
-              background: 'var(--primary-mid)',
-              border: '1px solid rgba(200,169,110,0.15)',
-              borderRadius: '4px',
-              padding: '40px',
-              marginBottom: '32px',
-            }}>
-              <p style={{ color: 'var(--accent-light)', fontSize: '14px', lineHeight: '2', marginBottom: '28px', textAlign: 'center' }}>
-                ご不明な点やご質問がございましたら、<br />
-                お電話またはInstagramよりお気軽にお問い合わせください。
-              </p>
-
-              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                <p style={{ color: 'var(--accent)', fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '8px' }}>Phone</p>
-                <a href="tel:075-212-1808" style={{ color: 'var(--accent-light)', fontSize: '24px', textDecoration: 'none', letterSpacing: '2px' }}>
-                  075-212-1808
-                </a>
-                <p style={{ color: '#7A6A54', fontSize: '12px', marginTop: '6px' }}>受付時間：12:00 〜 22:00（不定休）</p>
-              </div>
-
-              <div style={{ borderTop: '1px solid rgba(200,169,110,0.15)', paddingTop: '24px', textAlign: 'center' }}>
-                <p style={{ color: 'var(--accent)', fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px' }}>Instagram</p>
-                <a
-                  href="https://www.instagram.com/elephantfactorycoffee"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    background: 'transparent',
-                    border: '1px solid var(--accent)',
-                    color: 'var(--accent)',
-                    padding: '12px 32px',
-                    fontSize: '13px',
-                    letterSpacing: '2px',
-                    textDecoration: 'none',
-                    borderRadius: '2px',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Instagram を開く
-                </a>
-              </div>
+          <div style={{ paddingTop: '60px', maxWidth: '600px' }}>
+            <div style={{ marginBottom: '48px', borderBottom: '1px solid var(--border)', paddingBottom: '24px' }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', letterSpacing: '4px', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: '8px' }}>Contact</p>
+              <h2 style={{ fontSize: '28px', color: 'var(--primary)', fontWeight: '700' }}>お問い合わせ</h2>
             </div>
 
-            <div style={{
-              background: 'var(--primary)',
-              border: '1px solid rgba(200,169,110,0.2)',
-              borderRadius: '4px',
-              padding: '24px 32px',
-              textAlign: 'center',
-            }}>
-              <p style={{ color: '#7A6A54', fontSize: '13px', lineHeight: '2' }}>
+            <p style={{ color: 'var(--text-mid)', fontSize: '14px', lineHeight: '2', marginBottom: '40px' }}>
+              ご不明な点・ご質問は、お電話またはInstagramよりお気軽にどうぞ。
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '40px' }}>
+              <a href="tel:075-212-1808" style={{
+                display: 'block',
+                background: 'var(--primary)',
+                color: 'var(--bg)',
+                padding: '28px 24px',
+                textDecoration: 'none',
+                borderRadius: '1px',
+              }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', letterSpacing: '3px', color: 'var(--accent-light)', marginBottom: '8px', textTransform: 'uppercase' }}>Phone</p>
+                <p style={{ fontSize: '20px', letterSpacing: '1px', color: 'var(--bg)' }}>075-212-1808</p>
+                <p style={{ fontSize: '11px', color: 'rgba(244,239,230,0.5)', marginTop: '6px' }}>12:00 〜 22:00 / 不定休</p>
+              </a>
+
+              <a
+                href="https://www.instagram.com/elephantfactorycoffee"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'block',
+                  background: 'var(--accent)',
+                  color: 'var(--white)',
+                  padding: '28px 24px',
+                  textDecoration: 'none',
+                  borderRadius: '1px',
+                }}
+              >
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', letterSpacing: '3px', color: 'rgba(253,250,246,0.7)', marginBottom: '8px', textTransform: 'uppercase' }}>Instagram</p>
+                <p style={{ fontSize: '16px', letterSpacing: '1px', color: 'var(--white)' }}>@elephantfactorycoffee</p>
+                <p style={{ fontSize: '11px', color: 'rgba(253,250,246,0.7)', marginTop: '6px' }}>DMもお気軽に</p>
+              </a>
+            </div>
+
+            <div style={{ background: 'var(--bg-section)', border: '1px solid var(--border)', borderRadius: '2px', padding: '24px 32px' }}>
+              <p style={{ color: 'var(--text-light)', fontSize: '13px', lineHeight: '2' }}>
                 〒604-8072<br />
                 京都市中京区蛸薬師通東入ル備前島町309-4 HKビル2F<br />
                 ELEPHANT FACTORY COFFEE
@@ -417,17 +577,21 @@ export default function Home() {
             </div>
           </div>
         )}
+
       </main>
 
       {/* Footer */}
       <footer style={{
         background: 'var(--primary)',
-        borderTop: '1px solid rgba(200,169,110,0.15)',
-        padding: '32px 24px',
-        textAlign: 'center',
+        padding: '40px 32px',
       }}>
-        <p style={{ color: 'var(--accent)', fontSize: '14px', letterSpacing: '2px', marginBottom: '8px' }}>ELEPHANT FACTORY COFFEE</p>
-        <p style={{ color: '#7A6A54', fontSize: '12px' }}>© 2024 Elephant Factory Coffee. All rights reserved.</p>
+        <div style={{ maxWidth: '1040px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '16px', letterSpacing: '3px', color: 'var(--bg)', marginBottom: '4px' }}>ELEPHANT FACTORY COFFEE</p>
+            <p style={{ fontSize: '11px', color: 'rgba(244,239,230,0.4)', letterSpacing: '1px' }}>KYOTO · SPECIALTY COFFEE</p>
+          </div>
+          <p style={{ fontSize: '11px', color: 'rgba(244,239,230,0.3)' }}>© 2024 Elephant Factory Coffee</p>
+        </div>
       </footer>
     </div>
   )
